@@ -4,6 +4,7 @@ import UIKit
 
 public extension Snapshotting where Value == UIView, Format == UIImage {
     /// A snapshot strategy for comparing views based on pixel equality.
+    @MainActor
     static var imageHEIC: Snapshotting {
         return .imageHEIC()
     }
@@ -19,6 +20,7 @@ public extension Snapshotting where Value == UIView, Format == UIImage {
     ///   - size: A view size override.
     ///   - traits: A trait collection override.
     ///   - compressionQuality: The desired compression quality to use when writing to an image destination.
+    @MainActor
     static func imageHEIC(
         drawHierarchyInKeyWindow: Bool = false,
         precision: Float = 1,
