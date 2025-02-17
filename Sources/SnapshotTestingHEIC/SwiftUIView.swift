@@ -14,8 +14,9 @@ import SwiftUI
 public extension Snapshotting where Value: SwiftUI.View, Format == UIImage {
 
     /// A snapshot strategy for comparing views based on pixel equality.
+    @MainActor
     static var imageHEIC: Snapshotting {
-        return .imageHEIC()
+        .imageHEIC()
     }
 
     /// A snapshot strategy for comparing SwiftUI Views based on pixel equality.
@@ -27,6 +28,7 @@ public extension Snapshotting where Value: SwiftUI.View, Format == UIImage {
     ///   - layout: A view layout override.
     ///   - traits: A trait collection override.
     ///   - compressionQuality: The desired compression quality to use when writing to an image destination.
+    @MainActor
     static func imageHEIC(
         drawHierarchyInKeyWindow: Bool = false,
         precision: Float = 1,

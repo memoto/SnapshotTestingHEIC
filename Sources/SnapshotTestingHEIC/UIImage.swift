@@ -1,10 +1,11 @@
 #if os(iOS) || os(tvOS)
-import UIKit
+@preconcurrency import UIKit
 import XCTest
-import SnapshotTesting
+@preconcurrency import SnapshotTesting
 
 public extension Diffing where Value == UIImage {
     /// A pixel-diffing strategy for UIImage's which requires a 100% match.
+    @MainActor
     static let imageHEIC = Diffing.imageHEIC()
     
     /// A pixel-diffing strategy for UIImage that allows customizing how precise the matching must be.
@@ -15,7 +16,7 @@ public extension Diffing where Value == UIImage {
     /// default value of `0.0`, the screens scale is used.
     /// - Parameter compressionQuality: The desired compression quality to use when writing to an image destination.
     /// - Returns: A new diffing strategy.
-    static func imageHEIC(
+    @MainActor static func imageHEIC(
         precision: Float = 1,
         perceptualPrecision: Float = 1,
         scale: CGFloat? = nil,
@@ -60,6 +61,7 @@ public extension Diffing where Value == UIImage {
     }
     
     /// Used when the image size has no width or no height to generated the default empty image
+    @MainActor
     private static func emptyImage() -> UIImage {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 400, height: 80))
         label.backgroundColor = .red
@@ -75,8 +77,9 @@ public extension Diffing where Value == UIImage {
 
 public extension Snapshotting where Value == UIImage, Format == UIImage {
     /// A snapshot strategy for comparing images based on pixel equality.
+    @MainActor
     static var imageHEIC: Snapshotting {
-        return .imageHEIC()
+        .imageHEIC()
     }
     
     /// A snapshot strategy for comparing images based on pixel equality.
@@ -85,6 +88,7 @@ public extension Snapshotting where Value == UIImage, Format == UIImage {
     /// - Parameter perceptualPrecision: The percentage a pixel must match the source pixel to be considered a match. [98-99% mimics the precision of the human eye.](http://zschuessler.github.io/DeltaE/learn/#toc-defining-delta-e)
     /// - Parameter scale: The scale of the reference image stored on disk.
     /// - Parameter compressionQuality: The desired compression quality to use when writing to an image destination.
+    @MainActor
     static func imageHEIC(
         precision: Float = 1,
         perceptualPrecision: Float = 1,
