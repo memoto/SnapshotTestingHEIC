@@ -6,7 +6,7 @@ public extension Snapshotting where Value == UIViewController, Format == UIImage
     /// A snapshot strategy for comparing view controller views based on pixel equality.
     @MainActor
     static var imageHEIC: Snapshotting {
-        return .imageHEIC()
+        .imageHEIC()
     }
 
     /// A snapshot strategy for comparing view controller views based on pixel equality.
@@ -28,7 +28,7 @@ public extension Snapshotting where Value == UIViewController, Format == UIImage
         compressionQuality: CompressionQuality = .lossless
     )
     -> Snapshotting {
-        return SimplySnapshotting.imageHEIC(
+        SimplySnapshotting.imageHEIC(
             precision: precision,
             perceptualPrecision: perceptualPrecision,
             scale: traits.displayScale,
@@ -65,7 +65,7 @@ public extension Snapshotting where Value == UIViewController, Format == UIImage
         compressionQuality: CompressionQuality = .lossless
     )
     -> Snapshotting {
-        return SimplySnapshotting.imageHEIC(
+        SimplySnapshotting.imageHEIC(
             precision: precision,
             perceptualPrecision: perceptualPrecision,
             scale: traits.displayScale,

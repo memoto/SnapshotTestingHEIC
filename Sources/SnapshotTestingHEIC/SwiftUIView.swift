@@ -16,7 +16,7 @@ public extension Snapshotting where Value: SwiftUI.View, Format == UIImage {
     /// A snapshot strategy for comparing views based on pixel equality.
     @MainActor
     static var imageHEIC: Snapshotting {
-        return .imageHEIC()
+        .imageHEIC()
     }
 
     /// A snapshot strategy for comparing SwiftUI Views based on pixel equality.
